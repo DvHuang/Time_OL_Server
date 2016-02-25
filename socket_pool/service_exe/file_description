@@ -1,0 +1,59 @@
+there is a very worthy of reference function in the program,the client input information to the server processing ,service identification is not s simple data,which is equivalent to a command,
+
+simple implementation is as follows
+
+
+server side 
+
+first step::creat a struct sockaddr_in and fill them
+     s.1:  struct sockaddr_in server_addr;  //config a socket struct server_addr on behalf of server internet address,port.
+     s.2:  server_addr.sin_family=AF_INET;  //tcp protocol
+           server_addr.sin_addr.s_addr=htons(INADDR_ANY);//htons useful is to store your actual interger host memory(little endian) in network byte (big endian)order to adjust.
+           server_addr.sin_port=htons(....);
+second step:creat server socket
+     s.3   int server_socket =socket(PF_INET,SOCK_STREAM,0);
+
+third setp:bind socket and sockaddr
+     s.4   bind(server_socket,(struct sockaddr*)&server_addr,sizeof(server_addr))
+
+fourth step:listen
+     s.5    listen (socket,maximum length of queue waiting for connection)
+s
+fifth  step:accept
+     s.6   the accept will return to a new socked and the socked represents a communication channel,so before we use accept ,we should have something about client
+     s.6.1  at first we need a struct sockaddr_in about client
+     s.6.2  then we need the sizeof client struct
+     s.6.3  now we can accept 
+            new_server_socket=accept (server_socket,(struct sockaddr*)&client_addr,length);
+  
+
+     all above is a link must step 
+client 
+
+first step: creat a struct sockaddr_in and fill them 
+     1.1  struct sockaddr_in client_addr
+          client.addr.sin_family=AF_INET;
+          client.addr.sin_addr.s_addr=htons(INADDR_ANY);INADDR_ANY automatic access to 
+          client.addr.sin_port=htons(0); o=automatic a free port
+     1.2  creat socked 
+          client_socket=socket(AF_INET,SOCK_STREAM,0)
+     1.3  bind(client_socket,(struct sockaddr*)&client_addr,sizeof(client_addr))
+
+     1.4  for the connect ,we need the server_addr
+          so 
+          struct cokaddr_in server_addr;
+          connect(client_socket,(struct sockaddr*)&server_addr,server_addr_length)
+     above all could make the connect
+
+some useful skill
+  
+   one: get input form the console  just on start
+   inet_aton(argv[1],&server_addr,sin_addr)
+
+   two get input from the console steping
+   char file_name[size];
+   bzero(file_name,size);
+   printf("please input file name on server:\t"); \t=table input use this
+   scanf("%s",file_name);
+     
+            
