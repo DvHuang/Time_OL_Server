@@ -1,5 +1,6 @@
 # Time_OL_Server
-c 线程池 socket LAB 服务器
+c 线程池 socket LAB 服务端
+
 客户端程序地址：https://github.com/DvHuang/Time_OL_Client
 
 
