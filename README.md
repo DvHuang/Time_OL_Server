@@ -1,5 +1,9 @@
 # Time_OL_Server
 c 线程池 socket LAB 服务器
+客户端程序地址：https://github.com/DvHuang/Time_OL_Client
+
+
+![image](https://github.com/DvHuang/Time_OL_Client/blob/master/server.PNG)
 
 实验室打卡程序的服务端...
 
